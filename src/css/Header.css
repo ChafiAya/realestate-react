@@ -1,0 +1,139 @@
+.header {
+  background-color: rgb(0, 0, 0);
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header__content {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  max-width: 72rem;
+  padding: 0.75rem;
+  margin: 0 auto;
+}
+
+.header__logo-image {
+  height: 4rem;
+  cursor:pointer;
+}
+
+.header__links {
+  display: flex;
+}
+
+.header__links > * + * {
+  margin-left: 2.5rem;
+}
+
+
+.header__list {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header__list-item {
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-right: 1.5rem;
+  padding-bottom: 0.75rem;
+  text-transform: uppercase;
+  color:white
+}
+
+.header__list-item {
+  /* Other styles */
+  transition: transform 0.3s;
+}
+
+.header__list-item:hover,
+.header__list-item:focus,
+.header__list-item:active {
+  transform: translateZ(10px);
+  border-bottom-color: #7a680f;
+  color: #7a680f;
+}
+
+
+.header__list-item>img{
+background-color:  #7a680f;
+height: 20px;
+width: 20px;
+padding: "10px"
+}
+
+.sign-in-button {
+  border-bottom: 2px solid transparent;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.sign-in-button:hover {
+  border-bottom: 2px solid #ffffff;
+  box-shadow: 0 0 2px 2px #7a680f;
+}
+
+.sign-in-button.active,
+.sign-in-button.active:hover {
+  background-color: #7a680f;
+  border-bottom-color: #a7a7a7;
+  box-shadow: 0 0 2px 2px #7a680f;
+  color: black;
+}
+
+
+
+
+/* Add this to prevent clicking on the header while the sign-in panel is open */
+
+
+.sign-in {
+position: fixed;
+top: 70px;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(0, 0, 0, 0.5);
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.sign-in2 {
+background-color: white;
+box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Add these media queries to handle responsiveness */
+@media (max-width: 768px) {
+.sign-in {
+  width: 100%;
+  margin-top: 0;
+}
+.sign-in2 {
+  border-radius: 0;
+  max-width: 100%;
+}
+}
+
+.sign-in2 {
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-style: bold;
+}

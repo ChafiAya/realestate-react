@@ -1,38 +1,92 @@
-import React from 'react';
-import { useLocation ,useNavigate} from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import '../css/Header.css';
+import SignIn from "../pages/SignIn";
 
 export default function Header() {
   const location = useLocation();
-const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [showSignIn, setShowSignIn] = useState(false);
+
+  const toggleSignIn = () => {
+    setShowSignIn(!showSignIn);
+  };
+
+  
+ 
+  const handleForgotPasswordClick = () => {
+    setShowSignIn(false); // close the login panel
+    navigate('/forgot-password');
+  };
+
+  const handleRegisterClick = () => {
+    setShowSignIn(false); // close the login panel
+    navigate('/register');
+  };
+
+
   return (
-    <div className="bg-white border-b shadow-sm sticky top-0 z-50">
-      <header className="flex justify-between items-center px-3 max-w-6xl mx-auto">
+    <div className="header">
+      <header className="header__content">
         <div>
-          <img src="https://s.zillowstatic.com/pfs/static/z-logo-default.svg" alt="logo" 
-            className="h-5 cursor-pointer"/>             
+          <img
+            src="https://cdn5.vectorstock.com/i/1000x1000/29/39/creative-h-initial-letter-h-logo-design-vector-28822939.jpg"
+            alt="logo"
+            className="header__logo-image"
+          />
         </div>
         <div>
-          <ul className="flex space-x-10">
-            <li className={`cursor-pointer py-3 text-sm font-semibold ${location.pathname === '/' ? 'text-black border-b-2 border-blue-500' : 'text-gray-400 border-b-2 border-transparent'}`}
-             onClick={() => navigate("/")}>
-              Home 
+          <ul className="header__links">
+            <li
+              className={`header__list-item sign-in-button ${
+                location.pathname === '/' ? 'active' : ''
+              }`}
+              onClick={() => navigate('/')}>
+              <img
+                src="https://img.icons8.com/pulsar-line/512/home-page.png"
+                style={{
+                  display: 'inline-block',
+                  verticalAlign: 'middle',
+                  marginRight: '10px',
+                }}
+              />
+              <span style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+                Home
+              </span>
             </li>
-            <li className={`cursor-pointer py-3 text-sm font-semibold ${location.pathname === '/offers' ? 'text-black border-b-2 border-blue-500' : 'text-gray-400 border-b-2 border-transparent'}`}
-              onClick={() => navigate("/offers")}>
+            <li
+              className={`header__list-item sign-in-button ${
+                location.pathname === '/offers' ? 'active' : ''
+              }`}
+              onClick={() => navigate('/offers')}>
               Offers
             </li>
-            <li className={`cursor-pointer py-3 text-sm font-semibold ${location.pathname === '/about-us' ? 'text-black border-b-2 border-blue-500' : 'text-gray-400 border-b-2 border-transparent'}`}
-            onClick={() => navigate("/about-us")}>
+            <li
+              className={`header__list-item sign-in-button ${
+                location.pathname === '/about-us' ? 'active' : ''
+              }`}
+              onClick={() => navigate('/about-us')}>
               About us
             </li>
-            <li className={`cursor-pointer py-3 text-sm font-semibold ${location.pathname === '/sign-in' ? 'text-black border-b-2 border-blue-500' : 'text-gray-400 border-b-2 border-transparent'}`}
-            onClick={() => navigate("/sign-in")}>
-    
+            <li
+              className={`header__list-item sign-in-button ${
+                location.pathname === '/sign-in' ? 'active' : ''
+              }`}
+              onClick={toggleSignIn}>
               Sign in
             </li>
           </ul>
         </div>
       </header>
+      {showSignIn && (
+        <div className="sign-in">
+          <div className="sign-in2" onClick={(e) => e.stopPropagation()}>
+            <button className="close-button" onClick={toggleSignIn}> X </button>
+            <SignIn onForgotPasswordClick={handleForgotPasswordClick} onRegisterClick={handleRegisterClick} />
+           
+          </div>
+        </div>
+      )}
     </div>
   );
 }

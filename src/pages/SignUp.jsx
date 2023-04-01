@@ -2,6 +2,8 @@ import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import SignIn from "../pages/SignIn";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -12,7 +14,9 @@ import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export default function SignUp() {
+export default function SignUp({onSignInClick }) {
+ 
+  
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -47,7 +51,7 @@ export default function SignUp() {
       formDataCopy.timestamp = serverTimestamp();
 
       await setDoc(doc(db, "users", user.uid), formDataCopy);
-       toast.success("Sign up was successful");
+      toast.success("Sign up was successful");
        navigate("/");
     } catch (error) {
       toast.error("Something went wrong with the registration");
@@ -59,7 +63,7 @@ export default function SignUp() {
       <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
         <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6">
           <img
-            src="https://images.unsplash.com/flagged/photo-1564767609342-620cb19b2357?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1373&q=80"
+            src="https://smashinglogo.com/v3/envision/image.jpg?id=db97f97f-3ffc-420e-8a33-70c0959943d2&format=desktop"
             alt="key"
             className="w-full rounded-2xl"
           />
@@ -104,15 +108,17 @@ export default function SignUp() {
               )}
             </div>
             <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg">
-              <p className="mb-6">
-                Have a account?
-                <Link
-                  to="/sign-in"
-                  className="text-red-600 hover:text-red-700 transition duration-200 ease-in-out ml-1"
-                >
-                  Sign in
-                </Link>
-              </p>
+    <div className="mb-6">
+      Have an account?
+      <Link
+        to="/sign-in"
+        className="text-red-600 hover:text-red-700 transition duration-200 ease-in-out ml-1"
+      >
+        Sign in
+      </Link>
+    </div>
+
+
               <p>
                 <Link
                   to="/forgot-password"
