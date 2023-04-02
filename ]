@@ -1,0 +1,35 @@
+[33mcommit c601caa66e781c6e9603081caf4e1ed975e8e12e[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: unknown <chafi.1111.aya@gmail.com>
+Date:   Sun Apr 2 01:22:12 2023 +0200
+
+    create private root and custom hook for protection the profile page and add the logout functionality
+
+[33mcommit 616795dbccb786522675a63ec1e81c9f2c4b87ef[m
+Author: unknown <chafi.1111.aya@gmail.com>
+Date:   Sun Mar 26 15:55:28 2023 +0200
+
+    install firebase and react toastify and sign up the user
+
+[33mcommit 3f972dd1727c9bb428f983e3ae76320459e8025d[m
+Author: unknown <chafi.1111.aya@gmail.com>
+Date:   Sun Mar 26 00:51:24 2023 +0100
+
+    create OAth component an d sign , sign up , forgot password pages
+
+[33mcommit c94ac27e2c449f4485f1609a835ac52fa787b1b3[m
+Author: unknown <chafi.1111.aya@gmail.com>
+Date:   Sat Mar 25 15:36:36 2023 +0100
+
+    create header components
+
+[33mcommit e02f3f4892d1da1d6b14038a4470a2ccf38c66a8[m
+Author: unknown <chafi.1111.aya@gmail.com>
+Date:   Fri Mar 24 23:21:30 2023 +0100
+
+    Create pages and routes
+
+[33mcommit 9e2b0711d68109faf911df3a9f945595b5f444ce[m
+Author: unknown <chafi.1111.aya@gmail.com>
+Date:   Fri Mar 24 15:43:12 2023 +0100
+
+    Install ReactJS and TailwindCSS and create first template
