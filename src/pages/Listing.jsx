@@ -1,10 +1,10 @@
 import { doc, getDoc } from "firebase/firestore";
-import { useState } from "react";
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { db } from "../firebase";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import React, { useState, useEffect } from "react";
 import SwiperCore, {
   EffectFade,
   Autoplay,
@@ -32,7 +32,10 @@ export default function Listing() {
     const [loading, setLoading] = useState(true);
     const [shareLinkCopied, setShareLinkCopied] = useState(false);
     const [contactLandlord, setContactLandlord] = useState(false);
+    
     SwiperCore.use([Autoplay, Navigation, Pagination]);
+
+
   useEffect(() => {
     async function fetchListing() {
       const docRef = doc(db, "listings", params.listingId);
@@ -45,9 +48,19 @@ export default function Listing() {
     fetchListing();
   }, [params.listingId]);
 
+
+
   if (loading) {
     return <Spinner />;
   }
+
+  
+
+
+
+
+
+
 
   const handleShareOnFacebook = () => {
     const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
@@ -68,6 +81,7 @@ export default function Listing() {
     copyToClipboard(window.location.href);
   };
 
+   
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
     setShareLinkCopied(true);
@@ -75,6 +89,13 @@ export default function Listing() {
       setShareLinkCopied(false);
     }, 3000);
   };
+
+
+  
+
+
+
+
 
   return (
     <main>
@@ -149,6 +170,17 @@ export default function Listing() {
             <span className="font-semibold">Description - </span>
             {listing.description}
           </p>
+
+          <p className="mt-3 mb-3">
+            <span className="font-semibold">longitude - </span>
+            {listing.geolocation.lng}
+          </p>
+          <p className="mt-3 mb-3">
+            <span className="font-semibold">latitude - </span>
+            {listing.geolocation.lat}
+          </p>
+
+
           <ul className="flex items-center space-x-2 sm:space-x-10 text-sm font-semibold mb-6">
             <li className="flex items-center whitespace-nowrap">
               <FaBed className="text-lg mr-1" />
@@ -166,6 +198,8 @@ export default function Listing() {
               <FaChair className="text-lg mr-1" />
               {listing.furnished ? "Furnished" : "Not furnished"}
             </li>
+
+
           </ul>
           {listing.userRef !== auth.currentUser?.uid && !contactLandlord && (
             <div className="mt-6">
@@ -182,12 +216,31 @@ export default function Listing() {
           )}
         </div>
         <div className="w-full h-[200px] md:h-[400px] z-10 overflow-x-hidden mt-6 md:mt-0 md:ml-2">
-       
+        
+        <MapContainer
+            center={[listing.geolocation.lat, listing.geolocation.lng]}
+            zoom={13}
+            scrollWheelZoom={false}
+            style={{ height: "100%", width: "100%" }}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker
+              position={[listing.geolocation.lat, listing.geolocation.lng]}
+            >
+              <Popup>
+                {listing.address}
+              </Popup>
+            </Marker>
+          </MapContainer>
         </div>
       </div>
     </main>
   );
 }
+
 
 
 
